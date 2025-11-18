@@ -1,7 +1,5 @@
 # Change Log
 
-## v0.0.0 - YYYY-MM-DD
+## v0.0.1 - 2025-11-18
 
-### Features and Fixes
-
-- Initial release
+- Added `exercise.sh` script for navigating exercise workflow
