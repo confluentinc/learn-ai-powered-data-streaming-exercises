@@ -1,0 +1,41 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.black-formatter",
+        "confluentinc.vscode-confluent"
+      ]
+    }
+  },
+
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13"
+    }
+  },
+
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+  "workspaceFolder": "/workspace/exercises",
+
+  "remoteEnv": {
+    "PYTHONUNBUFFERED": "1"
+  },
+
+  "mounts": [
+    {
+      "source": "${localWorkspaceFolder}/solutions",
+      "target": "/workspace/exercises/solutions",
+      "type": "bind"
+    },
+    {
+      "source": "${localWorkspaceFolder}/README.md",
+      "target": "/workspace/exercises/README.md",
+      "type": "bind"
+    }
+  ],
+
+  "onCreateCommand": "sudo curl -L --http1.1 https://cnfl.io/cli | sudo sh -s -- -b /usr/local/bin && confluent plugin install confluent-flink-quickstart"
+}
