@@ -39,5 +39,4 @@ Thumbs.db
 # Exercises folder - ignore everything except exercise.sh
 exercises/*
 !exercises/exercise.sh
-!exercises/README.md
 

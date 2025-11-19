@@ -8,7 +8,7 @@ Please see the CHANGELOG.md for details of recent updates.
 
 # Workshop Introduction
 
-In this workshop, you will be building a real-time weather analytics pipeline using Confluent Cloud, Apache Kafka, Apache Flink, and Hugging Face.
+In this workshop, you will be building a real-time weather analytics pipeline using Confluent Cloud, Apache Kafka®, Apache Flink®, and Hugging Face.
 
 Instructions for the exercises can be found at [developer.confluent.io/courses/ai-powered-data-streaming](https://developer.confluent.io/courses/ai-powered-data-streaming)
 
@@ -21,12 +21,14 @@ Inside the folder you will find a script named `./exercise.sh`. This script cont
 ### Available Commands
 
 #### List All Exercises
+
 ```bash
 ./exercise.sh list
 ```
 Shows all available exercises from the solutions directory.
 
 #### Stage an Exercise
+
 ```bash
 ./exercise.sh stage <exercise-filter>
 ```
@@ -44,6 +46,7 @@ Copies starter files (such as tests) from the staging directory to your working 
 - You'll work on these files to complete the exercise
 
 #### Solve an Exercise (Get the Solution)
+
 ```bash
 ./exercise.sh solve <exercise-filter>
 ```
@@ -60,6 +63,7 @@ Copies the complete solution files for the specified exercise.
 - Useful if you get stuck and want to replace your solution with the official solution.
 
 #### Solve a Specific File
+
 ```bash
 ./exercise.sh solve <exercise-filter> <file-filter>
 ```
@@ -95,6 +99,49 @@ Copies just one specific file from the solution instead of everything.
    ./exercise.sh solve 01
    ```
 
+## Building exercises (using make)
+
+### Setup Confluent Cloud Environment
+
+```bash
+make setup-confluent
+```
+
+This will create:
+- Confluent Cloud environment named "weather_analytics"
+- Kafka cluster named "data_streams"
+- Flink compute pool named "stream_processing"
+- API keys for Kafka, Flink, and Schema Registry
+- Configuration files automatically populated in `config/` directory
+
+**Note:** You'll need the [Confluent CLI](https://docs.confluent.io/confluent-cli/current/install.html) installed and logged in.
+
+### Install Dependencies
+
+```bash
+make install
+```
+
+This will create a Python virtual environment and install all required dependencies.
+
+### Run the Application
+
+```bash
+make run
+```
+
+### Run Tests
+
+```bash
+make test
+```
+
+### Clean the Local Environment
+
+```bash
+make clean
+```
+
 ## Project Structure
 
 ```
@@ -104,8 +151,18 @@ learn-ai-powered-data-streaming-exercises/
 ├── LICENSE                          # License and contribution terms
 ├── service.yml                      # Service configuration
 │
-├── exercises/                       # Your working directory
-│   └── exercise.sh                  # Helper script for managing exercises
+├── exercises/                       # Your working directory (managed by the exercise.sh script)
+│   ├── exercise.sh                  # Helper script for managing exercises
+│   ├── Makefile                     # Build and development commands
+│   ├── pyproject.toml               # Python project configuration and dependencies
+│   ├── config/                      # Configuration files (created by setup-confluent)
+│   │   ├── kafka-librdkafka.properties  # Kafka connection settings
+│   │   ├── flink.properties         # Flink configuration
+│   │   └── schema-registry.properties   # Schema Registry settings
+│   ├── src/                             
+│   │   └── weather_analytics/       # Application source code
+│   └── tests/
+│       └── weather_analytics/       # Test files
 │
 ├── staging/                         # Starter templates for each exercise
 │   └── (exercise templates copied by `exercise.sh stage`)
