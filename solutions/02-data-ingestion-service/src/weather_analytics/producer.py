@@ -2,6 +2,8 @@
 Weather Analytics Workshop - Producer Application
 """
 
+from weather_analytics.data_ingestion_service import DataIngestionService
+
 
 def main():
     """Producer entry point - will eventually stream weather data to Kafka"""
@@ -10,7 +12,13 @@ def main():
     print("=" * 60)
     print()
 
-    print("Hello World")
+    ingestion_service = DataIngestionService(poll_interval=60)
+
+    try:
+        for observation in ingestion_service.ingest():
+            print(observation)
+    except KeyboardInterrupt:
+        print("\nProducer stopped.")
 
 
 if __name__ == "__main__":
