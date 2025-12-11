@@ -1,9 +1,10 @@
 """
-Weather Analytics Workshop - Main Application
+Weather Analytics Workshop - Producer Application
 """
 
+
 def main():
-    """Main application entry point - runs both ingestion and enrichment"""
+    """Producer entry point - will eventually stream weather data to Kafka"""
     print("=" * 60)
     print("Weather Analytics Workshop - AI-Powered Streaming Pipeline")
     print("=" * 60)
@@ -11,5 +12,7 @@ def main():
 
     print("Hello World")
 
+
 if __name__ == "__main__":
     main()
+

@@ -1,4 +1,4 @@
-.PHONY: help setup-confluent install clean build test run lint format
+.PHONY: help setup-confluent install clean build test produce consume run lint format
 .DEFAULT_GOAL := help
 
 # Variables
@@ -18,7 +18,9 @@ help:
 	@echo "  make clean           - Remove virtual environment and cache files"
 	@echo ""
 	@echo "Development Commands:"
-	@echo "  make run             - Run complete pipeline (ingestion + enrichment)"
+	@echo "  make produce         - Run the weather data producer"
+	@echo "  make consume         - Run the weather data consumer"
+	@echo "  make run             - Run the complete pipeline (producer + consumer)"
 	@echo "  make test            - Run all tests"
 	@echo ""
 
@@ -62,6 +64,19 @@ test:
 	$(PYTHON_VENV) -m pytest tests/ -v -s
 	@echo "Tests complete!"
 
+produce:
+	@rm -rf **/__pycache__ **/*.pyc
+	@echo "Starting weather data producer..."
+	$(PYTHON_VENV) -m weather_analytics.producer
+
+consume:
+	@rm -rf **/__pycache__ **/*.pyc
+	@echo "Starting weather data consumer..."
+	$(PYTHON_VENV) -m weather_analytics.consumer
+
 run:
-	@echo "Running complete weather analytics pipeline..."
-	$(PYTHON_VENV) -m weather_analytics.main
+	@rm -rf **/__pycache__ **/*.pyc
+	@echo "Starting weather analytics pipeline..."
+	@echo "Producer running in background, consumer in foreground."
+	@echo "Press Ctrl+C to stop."
+	@$(PYTHON_VENV) -m weather_analytics.producer & $(PYTHON_VENV) -m weather_analytics.consumer
