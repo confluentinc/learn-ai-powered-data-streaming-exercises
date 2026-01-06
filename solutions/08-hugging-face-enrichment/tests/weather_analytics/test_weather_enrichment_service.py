@@ -44,12 +44,8 @@ class TestWeatherEnrichmentService:
         mock_pipeline.return_value.assert_called_once_with("Clear skies", ["Sunny", "Cloudy", "Rainy", "Snowy", "Windy"])
 
     @patch("weather_analytics.weather_enrichment_service.pipeline")
-    def test_enrich_should_handle_missing_description(self, mock_pipeline):
-        """Test enrichment with missing description field uses default"""
-        mock_pipeline.return_value.return_value = {
-            "labels": ["Sunny", "Cloudy"],
-            "scores": [0.9, 0.1]
-        }
+    def test_enrich_should_set_unknown_for_missing_description(self, mock_pipeline):
+        """Test enrichment with missing description sets Unknown condition"""
         service = WeatherEnrichmentService()
 
         messages = [{"station_id": "KJFK", "temperature_c": 16.0}]
@@ -57,9 +53,10 @@ class TestWeatherEnrichmentService:
         enriched = list(service.enrich(messages))
 
         assert len(enriched) == 1
-        assert "weather_condition" in enriched[0]
+        assert enriched[0]["weather_condition"] == "Unknown"
         
-        mock_pipeline.return_value.assert_called_once_with("clear", ["Sunny", "Cloudy", "Rainy", "Snowy", "Windy"])
+        # Classifier should not be called when description is missing
+        mock_pipeline.return_value.assert_not_called()
 
     @patch("weather_analytics.weather_enrichment_service.pipeline")
     def test_enrich_should_handle_classification_error(self, mock_pipeline):

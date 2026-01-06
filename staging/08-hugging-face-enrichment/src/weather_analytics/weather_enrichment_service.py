@@ -13,7 +13,12 @@ class WeatherEnrichmentService:
             model_name: Hugging Face model for zero-shot classification
                        Default: facebook/bart-large-mnli (robust, ~1.6GB)
         """
-        self.classifier = pipeline("zero-shot-classification", model=model_name)
+        # TODO: Initialize the zero-shot classification pipeline
+        # - Use the pipeline() function from transformers
+        # - Set the task to "zero-shot-classification"
+        # - Pass the model_name parameter as the model
+        # - Store the result as self.classifier
+        ...
        
     def enrich(
         self, message_stream: Generator[dict, None, None]
@@ -29,19 +34,13 @@ class WeatherEnrichmentService:
         """
         categories = ["Sunny", "Cloudy", "Rainy", "Snowy", "Windy"]
         
-        for message in message_stream:
-            desc = message.get("description")
-            condition = "Unknown"
-            
-            if desc:
-                try:
-                    result = self.classifier(desc, categories)
-                    condition = result['labels'][0]
-                except Exception as e:
-                    print(f"Classification failed: {e}")
-            
-            message["weather_condition"] = condition
-            
-            print(f"{message.get('station_id')}: {desc} → {condition}")
-
-            yield message
+        # TODO: Implement the enrichment logic
+        # - Iterate over messages from message_stream
+        # - Get the "description" field from the message
+        # - Create a condition variable set to "Unknown"
+        # - If description exists, try to classify it using self.classifier
+        #   with the categories, and extract result['labels'][0]
+        # - If classification fails, print the error (condition stays "Unknown")
+        # - Add the condition as "weather_condition" field to the message
+        # - Yield the message
+        ...
