@@ -46,3 +46,13 @@ class TestConsumer:
         for message in test_messages:
             assert json.dumps(message) in print_calls
 
+    @patch("weather_analytics.consumer.KafkaConsumer")
+    def test_main_closes_consumer_in_finally_block(self, mock_consumer_class):
+        """Test that main() closes the consumer in the finally block"""
+        mock_consumer_instance = Mock()
+        mock_consumer_instance.consume_stream.return_value = iter([])
+        mock_consumer_class.return_value = mock_consumer_instance
+
+        main()
+
+        mock_consumer_instance.close.assert_called_once()

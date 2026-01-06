@@ -25,8 +25,9 @@ def main():
             print(json.dumps(message))
     except KeyboardInterrupt:
         print("Consumer stopped.")
+    finally:
+        consumer.close()
 
 
 if __name__ == "__main__":
     main()
-

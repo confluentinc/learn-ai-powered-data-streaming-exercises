@@ -13,20 +13,19 @@ def main():
     print("=" * 60)
     print()
 
-    consumer = KafkaConsumer(
-        kafka_config_file="config/kafka-librdkafka.properties",
-        schema_registry_config_file="config/schema-registry.properties",
-        topic="simplified_weather_observations",
-        group_id="weather-analytics-consumer"
-    )
+    # TODO: Create a KafkaConsumer instance with:
+    # - kafka_config_file: "config/kafka-librdkafka.properties"
+    # - schema_registry_config_file: "config/schema-registry.properties"
+    # - topic: "simplified_weather_observations"
+    # - group_id: "weather-analytics-consumer"
 
-    try:
-        for message in consumer.consume_stream():
-            print(json.dumps(message))
-    except KeyboardInterrupt:
-        print("Consumer stopped.")
+    # TODO: Implement a try/except/finally block that:
+    # - Loops over the consumer's consume_stream() method
+    # - Prints each message as JSON using json.dumps()
+    # - Catches KeyboardInterrupt and prints "Consumer stopped."
+    # - Closes the consumer in the finally block
+    ...
 
 
 if __name__ == "__main__":
     main()
-

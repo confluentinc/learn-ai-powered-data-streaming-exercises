@@ -45,7 +45,24 @@ class KafkaConsumer:
             topic: Source Kafka topic
             group_id: Consumer group ID (defaults to 'python-kafka-consumer')
         """
-        # TODO: Implement the initialization of the Kafka consumer
+        # TODO: Store the topic as an instance variable (self.topic)
+
+        # TODO: Load the Schema Registry config and create a SchemaRegistryClient
+        # - Use self.load_config() to load the schema_registry_config_file
+        # - Create a SchemaRegistryClient with the loaded config
+
+        # TODO: Create a JSONDeserializer with schema_str=None
+        # - Pass schema_str=None to fetch schemas automatically from the registry
+        # - Pass the schema_registry_client you created above
+
+        # TODO: Load the Kafka config and configure the consumer
+        # - Use self.load_config() to load the kafka_config_file
+        # - Add "group.id" set to the group_id parameter
+        # - Add "auto.offset.reset" set to "earliest"
+
+        # TODO: Create a Consumer and subscribe to the topic
+        # - Create a Consumer with the kafka_config
+        # - Call subscribe() with the topic in a list
         ...
 
     def consume_stream(self) -> Generator[dict, None, None]:
@@ -64,11 +81,24 @@ class KafkaConsumer:
         Yields:
             dict: Deserialized message as dictionary
         """
-        # TODO: Implement the consumption of the Kafka stream
+        # TODO: Implement a try/finally block with an infinite polling loop
+        #
+        # In the try block:
+        # - Loop indefinitely with while True
+        # - Poll for messages with self.consumer.poll(1.0)
+        # - Skip messages that are None or have errors (msg.error())
+        # - Deserialize the key using self.deserializer with SerializationContext
+        #   and MessageField.KEY, then extract the "station_id" from the result
+        # - Deserialize the value using self.deserializer with SerializationContext
+        #   and MessageField.VALUE
+        # - Add the station_id to the value data dictionary
+        # - Yield the complete message
+        #
+        # In the finally block:
+        # - Close the consumer with self.consumer.close()
         ...
 
     def close(self) -> None:
         """Close the consumer and clean up resources"""
-        # TODO: Implement the closing of the Kafka consumer
+        # TODO: Close the consumer by calling self.consumer.close()
         ...
-
