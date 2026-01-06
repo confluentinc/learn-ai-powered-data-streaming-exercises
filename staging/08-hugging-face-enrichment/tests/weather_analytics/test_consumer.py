@@ -86,3 +86,4 @@ class TestConsumer:
 
         for message in test_messages:
             assert json.dumps(message) in print_calls
+

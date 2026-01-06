@@ -4,6 +4,7 @@ Weather Analytics Workshop - Consumer Application
 
 import json
 from weather_analytics.kafka_consumer import KafkaConsumer
+from weather_analytics.weather_enrichment_service import WeatherEnrichmentService
 
 
 def main():
@@ -20,8 +21,11 @@ def main():
         group_id="weather-analytics-consumer"
     )
 
+    enrichment_service = WeatherEnrichmentService()
+
     try:
-        for message in consumer.consume_stream():
+        enriched_stream = enrichment_service.enrich(consumer.consume_stream())
+        for message in enriched_stream:
             print(json.dumps(message))
     except KeyboardInterrupt:
         print("Consumer stopped.")
@@ -29,4 +33,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
