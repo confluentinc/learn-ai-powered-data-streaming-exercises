@@ -2,8 +2,8 @@
 Weather Analytics Workshop - Consumer Application
 """
 
-import json
 from weather_analytics.kafka_consumer import KafkaConsumer
+from weather_analytics.kafka_producer import KafkaProducer
 from weather_analytics.weather_enrichment_service import WeatherEnrichmentService
 
 
@@ -23,12 +23,21 @@ def main():
 
     enrichment_service = WeatherEnrichmentService()
 
+    producer = KafkaProducer(
+        config_file="config/kafka-librdkafka.properties",
+        topic="enriched_weather_observations"
+    )
+
     try:
         enriched_stream = enrichment_service.enrich(consumer.consume_stream())
-        for message in enriched_stream:
-            print(json.dumps(message))
+        producer.produce_stream(
+            enriched_stream,
+            key_extractor=lambda msg: msg["station_id"]
+        )
     except KeyboardInterrupt:
         print("Consumer stopped.")
+    finally:
+        consumer.close()
 
 
 if __name__ == "__main__":

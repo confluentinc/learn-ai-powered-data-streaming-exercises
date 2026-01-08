@@ -5,15 +5,11 @@ from transformers import pipeline
 class WeatherEnrichmentService:
     """Service for enriching weather data using AI zero-shot classification"""
 
-    def __init__(self, model_name: str = "facebook/bart-large-mnli"):
+    def __init__(self):
         """
         Initialize the enrichment service with a zero-shot classification model
-
-        Args:
-            model_name: Hugging Face model for zero-shot classification
-                       Default: facebook/bart-large-mnli (robust, ~1.6GB)
         """
-        self.classifier = pipeline("zero-shot-classification", model=model_name)
+        self.classifier = pipeline("zero-shot-classification", model="valhalla/distilbart-mnli-12-1")
        
     def enrich(
         self, message_stream: Generator[dict, None, None]
