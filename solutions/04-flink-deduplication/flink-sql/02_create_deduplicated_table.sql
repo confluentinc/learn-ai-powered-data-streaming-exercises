@@ -12,11 +12,11 @@ CREATE TABLE deduplicated_weather_observations (
     `barometricPressure` ROW<`value` DOUBLE, `unitCode` STRING>,
     `dewpoint` ROW<`value` DOUBLE, `unitCode` STRING>,
     `visibility` ROW<`value` DOUBLE, `unitCode` STRING>
-  >,
-  `processing_time` TIMESTAMP(3) METADATA FROM 'timestamp'
+  >
 ) DISTRIBUTED BY (`station_id`) INTO 5 BUCKETS WITH (
   'scan.startup.mode' = 'earliest-offset',
   'key.format' = 'json-registry',
   'value.format' = 'json-registry',
   'kafka.retention.time' = '4 h'
 );
+
