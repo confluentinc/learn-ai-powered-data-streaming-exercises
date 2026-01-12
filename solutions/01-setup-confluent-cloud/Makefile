@@ -1,4 +1,4 @@
-.PHONY: help setup-confluent install clean build test produce consume run lint format
+.PHONY: help setup-confluent install clean test produce consume run
 .DEFAULT_GOAL := help
 
 # Variables
