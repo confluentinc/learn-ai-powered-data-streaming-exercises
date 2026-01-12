@@ -1,5 +1,4 @@
 from unittest.mock import patch, Mock
-import pytest
 
 from weather_analytics.producer import main
 

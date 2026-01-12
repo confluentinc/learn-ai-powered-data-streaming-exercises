@@ -1,5 +1,4 @@
-from unittest.mock import patch, Mock
-import pytest
+from unittest.mock import patch
 import requests
 import itertools
 
@@ -105,7 +104,9 @@ class TestDataIngestionService:
                 )
                 expected_stations.append(station_id)
             else:
-                requests.exceptions.RequestException("Station error")
+                responses.append(
+                    requests.exceptions.RequestException("Station error")
+                )
 
         mock_get.side_effect = responses
 
@@ -151,9 +152,7 @@ class TestDataIngestionService:
         
         # Get all stations from first cycle, plus one from second cycle
         # This proves it completed a cycle and slept before starting the next
-        observations = list(
-            itertools.islice(service.ingest(), len(DataIngestionService.STATIONS) + 1)
-        )
+        list(itertools.islice(service.ingest(), len(DataIngestionService.STATIONS) + 1))
         
         # Should have called sleep once after processing all stations
         mock_sleep.assert_called_once_with(poll_interval)
