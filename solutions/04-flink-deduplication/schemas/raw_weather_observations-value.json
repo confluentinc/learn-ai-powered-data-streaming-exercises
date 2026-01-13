@@ -1,0 +1,359 @@
+{
+  "additionalProperties": false,
+  "description": "Value schema for raw weather observations from NOAA API",
+  "properties": {
+    "properties": {
+      "connect.index": 0,
+      "description": "Weather observation properties from NOAA",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "station": {
+              "connect.index": 0,
+              "description": "NOAA station URL",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "stationId": {
+              "connect.index": 1,
+              "description": "ICAO station identifier (e.g., KJFK)",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "timestamp": {
+              "connect.index": 2,
+              "description": "Observation timestamp in ISO 8601 format",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "textDescription": {
+              "connect.index": 3,
+              "description": "Human-readable weather description",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            },
+            "temperature": {
+              "connect.index": 4,
+              "description": "Temperature measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Temperature in Celsius",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_temperature",
+                  "type": "object"
+                }
+              ]
+            },
+            "relativeHumidity": {
+              "connect.index": 5,
+              "description": "Relative humidity measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Relative humidity percentage",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_relativeHumidity",
+                  "type": "object"
+                }
+              ]
+            },
+            "windSpeed": {
+              "connect.index": 6,
+              "description": "Wind speed measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Wind speed in km/h",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_windSpeed",
+                  "type": "object"
+                }
+              ]
+            },
+            "windDirection": {
+              "connect.index": 7,
+              "description": "Wind direction measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Wind direction in degrees",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_windDirection",
+                  "type": "object"
+                }
+              ]
+            },
+            "barometricPressure": {
+              "connect.index": 8,
+              "description": "Barometric pressure measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Barometric pressure in Pascals",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_barometricPressure",
+                  "type": "object"
+                }
+              ]
+            },
+            "dewpoint": {
+              "connect.index": 9,
+              "description": "Dewpoint measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Dewpoint in Celsius",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_dewpoint",
+                  "type": "object"
+                }
+              ]
+            },
+            "visibility": {
+              "connect.index": 10,
+              "description": "Visibility measurement",
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "additionalProperties": false,
+                  "properties": {
+                    "value": {
+                      "connect.index": 0,
+                      "description": "Visibility in meters",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "connect.type": "float64",
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unitCode": {
+                      "connect.index": 1,
+                      "description": "Unit of measurement",
+                      "oneOf": [
+                        {
+                          "type": "null"
+                        },
+                        {
+                          "type": "string"
+                        }
+                      ]
+                    }
+                  },
+                  "title": "Record_properties_visibility",
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "title": "Record_properties",
+          "type": "object"
+        }
+      ]
+    }
+  },
+  "title": "Record",
+  "type": "object"
+}
