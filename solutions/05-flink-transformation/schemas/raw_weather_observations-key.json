@@ -1,0 +1,20 @@
+{
+  "additionalProperties": false,
+  "description": "Key schema for raw weather observations - contains the station identifier",
+  "properties": {
+    "station_id": {
+      "connect.index": 0,
+      "description": "ICAO station identifier (e.g., KJFK)",
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "title": "Key",
+  "type": "object"
+}
