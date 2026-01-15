@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.2.1 - 2026-01-15
+
+- Removed `make run` command from Makefiles and README
+  - Users should run `make produce` and `make consume` separately as needed
+
 ## v0.2.0 - 2026-01-12
 
 - Added Exercise 02: Data Ingestion Service
