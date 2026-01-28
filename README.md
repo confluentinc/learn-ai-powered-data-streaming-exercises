@@ -124,12 +124,6 @@ make install
 
 This will create a Python virtual environment and install all required dependencies.
 
-### Run the Application
-
-```bash
-make run
-```
-
 ### Run Tests
 
 ```bash

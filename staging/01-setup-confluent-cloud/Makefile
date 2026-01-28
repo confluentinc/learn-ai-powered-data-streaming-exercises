@@ -1,4 +1,4 @@
-.PHONY: help setup-confluent install clean build test produce consume run lint format
+.PHONY: help setup-confluent install clean test produce consume
 .DEFAULT_GOAL := help
 
 # Variables
@@ -20,7 +20,6 @@ help:
 	@echo "Development Commands:"
 	@echo "  make produce         - Run the weather data producer"
 	@echo "  make consume         - Run the weather data consumer"
-	@echo "  make run             - Run the complete pipeline (producer + consumer)"
 	@echo "  make test            - Run all tests"
 	@echo ""
 
@@ -73,10 +72,3 @@ consume:
 	@rm -rf **/__pycache__ **/*.pyc
 	@echo "Starting weather data consumer..."
 	$(PYTHON_VENV) -m weather_analytics.consumer
-
-run:
-	@rm -rf **/__pycache__ **/*.pyc
-	@echo "Starting weather analytics pipeline..."
-	@echo "Producer running in background, consumer in foreground."
-	@echo "Press Ctrl+C to stop."
-	@$(PYTHON_VENV) -m weather_analytics.producer & $(PYTHON_VENV) -m weather_analytics.consumer
