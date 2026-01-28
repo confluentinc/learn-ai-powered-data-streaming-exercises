@@ -1,5 +1,4 @@
-from unittest.mock import patch, Mock, call, ANY
-import pytest
+from unittest.mock import patch, Mock, ANY
 
 from weather_analytics.producer import main
 

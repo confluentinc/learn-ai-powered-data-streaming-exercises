@@ -3,7 +3,6 @@ Tests for Kafka Producer
 """
 
 import json
-import pytest
 from unittest.mock import patch, mock_open
 from weather_analytics.kafka_producer import KafkaProducer
 
@@ -63,5 +62,8 @@ security.protocol=PLAINTEXT
         calls = mock_producer_class.return_value.produce.call_args_list
         assert calls[0][1]["key"] == b'{"station_id": "KJFK"}'
         assert calls[1][1]["key"] == b'{"station_id": "KLAX"}'
+        assert calls[0][1]["value"] == json.dumps(messages[0]).encode("utf-8")
+        assert calls[1][1]["value"] == json.dumps(messages[1]).encode("utf-8")
+        assert callable(calls[0][1]["callback"])
 
         mock_producer_class.return_value.flush.assert_called_once_with(30.0)

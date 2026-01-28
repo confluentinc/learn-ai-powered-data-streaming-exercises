@@ -78,6 +78,11 @@ class KafkaProducer:
                 # Serialize value as JSON
                 value = json.dumps(message).encode("utf-8")
 
-                self.producer.produce(topic=self.topic, key=key, value=value)
+                self.producer.produce(
+                    topic=self.topic,
+                    key=key,
+                    value=value,
+                    callback=lambda err, msg: print(f"Produced to {msg.topic()} (error={err})")
+                )
         finally:
             self.producer.flush(30.0)
